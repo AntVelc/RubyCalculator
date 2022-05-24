@@ -1,86 +1,69 @@
-def calculator(calculus)
-  calculus += "s"
-  cn = calculus.length
+def calculator(numberCalc)
+  numberCalc += "s"
   n = 0
-  numberCounter = 0
-  nr1 = ""
-  nr2 = ""
   final = 0
-  operand = ""
+  numberArray = Array.new
+  m = 0
 
+  while numberCalc.count("+-/*") > m
+
+    numberArray = numberCalc.split(/(\d+)/)
+    m += 1
   
-  while n < cn
+  end
+
+  calculus = numberArray.drop(1)
+  cn = calculus.length
+
+
+  while n < cn 
+
+
     if calculus[n].count("0-9") > 0 
 
-      if operand == "" 
-	      nr1 = nr1 + calculus[n]
+      if  calculus[n-1] == "+" || calculus[n-1] == "-" || calculus[n-1] == "*"  || calculus[n-1] == "/" 
+	      nr2 = calculus[n]
 	      n += 1
-	      numberCounter += 1
+      else
+	      nr1 = calculus[n]
+	      n += 2
       end
+
+    elsif calculus[n-2] == "+"
+
+	    final = nr1.to_i + nr2.to_i
+      nr1 = final
+      nr2 = ""
+      n += 1
+
+    elsif calculus[n-2] == "-"
+
+	    final = nr1.to_i - nr2.to_i
+      nr1 = final
+      nr2 = ""
+      n += 1
       
-      if operand == "+" || operand == "-" || operand == "*"|| operand == "/"
-	      nr2 = nr2 + calculus[n]
-	      n += 1
-	      numberCounter += 1
-      end
+    elsif calculus[n-2] == "*"
+
+	    final = nr1.to_i * nr2.to_i
+      nr1 = final
+      nr2 = ""
+      n += 1
       
-    elsif (operand == "+" && calculus[n] = "s") || calculus[n] == "+"
-      if operand == ""
-        operand = operand + "+"
-        n += 1
-      elsif operand == "+" 
-	      final = nr1.to_i + nr2.to_i
-	      numberCounter = 0
-        nr = ""
-        nr2 = ""
-        operand = ""
-        n += 1
-      end
-	  elsif (operand == "-" && calculus[n] = "s") || calculus[n] == "-"
-      if operand == ""
-        operand += "-"
-        n += 1
-      elsif operand == "-"
-	      final = nr1.to_i - nr2.to_i
-	      n += 1
-	      numberCounter = 0
-        nr1 = ""
-        nr2 = ""
-        operand = ""
-      end
-      
-	  elsif (operand == "*" && calculus[n] = "s") || calculus[n] == "*"
-      
-      if operand == ""
-        operand += "*"
-        n += 1
-      elsif operand == "*"
-	      final = nr1.to_i * nr2.to_i
-	      n += 1
-	      numberCounter = 0
-        nr = ""
-        nr2 = ""
-        operand = ""
-      end
-      
-    elsif (operand == "/" && calculus[n] = "s") || calculus[n] == "/"
-      if operand == ""
-        operand += "/"
-        n += 1
-      elsif operand == "/"	    
-        final = nr1.to_i / nr2.to_i
-	      n += 1
-	      numberCounter = 0
-        nr = ""
-        nr2 = ""
-        operand = ""
-      end
+    elsif calculus[n-2] == "/"
+
+	    final = nr1.to_i / nr2.to_i
+      nr1 = final
+      nr2 = ""
+      n += 1
+
     end
 	end
 
   puts final
 
   ready = gets.chomp
+  
 end
 
 puts "please write numbers to be calculated along with operands"
