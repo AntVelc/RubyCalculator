@@ -4,17 +4,42 @@ def calculator(numberCalc)
   final = 0
   numberArray = Array.new
   m = 0
+  calculus = []
 
-  while numberCalc.count("+-/*") > m
 
-    numberArray = numberCalc.split(/(\d+)/)
-    m += 1
-  
+  numberArray = numberCalc.split(/(\d+)/)
+
+  if numberArray[0] != "-"
+    calculusPre = numberArray.drop(1)
+  elsif
+    calculusPre = numberArray
   end
 
-  calculus = numberArray.drop(1)
-  cn = calculus.length
+  
+  cm = calculusPre.length
 
+  while m < cm
+
+    if m == 0 && calculusPre[m].start_with?("-")
+      
+      calculusPre[m+1] = "-" + calculusPre[m+1]
+      calculus.drop(1)
+      
+    elsif m > 0 && (calculusPre[m] == "+-" || calculusPre[m] == "--" || calculusPre[m] == "*-"  || calculusPre[m] == "/-")
+      
+      calculusPre[m+1] = "-" + calculusPre[m+1]
+      calculus.append(calculusPre[m].chomp("-"))
+      
+    elsif
+      calculus.append(calculusPre[m])
+    end
+    
+    m += 1
+
+  end
+
+  cn = calculus.length
+  calculus
 
   while n < cn 
 
@@ -68,12 +93,12 @@ end
 
 puts "please write numbers to be calculated along with operands"
 
-m = 0
+k = 0
 
-while m < 1
+while k < 1
   calculation_string = gets.chomp
-  if calculation_string.count("+-/*") > 0 && calculation_string[0].count("0-9") > 0 && calculation_string[-1].count("0-9") > 0
-    m +=1
+  if calculation_string.count("+-/*") > 0 && (calculation_string[0].count("0-9") > 0 || calculation_string[0].count("-") > 0) && calculation_string[-1].count("0-9") > 0
+    k +=1
     calcReady = calculation_string.delete(' ')
     calculator(calcReady)
 else
