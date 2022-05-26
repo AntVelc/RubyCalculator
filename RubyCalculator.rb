@@ -56,28 +56,28 @@ def calculator(numberCalc)
 
     elsif calculus[n-2] == "+"
 
-	    final = nr1.to_i + nr2.to_i
+	    final = nr1.to_f + nr2.to_f
       nr1 = final
       nr2 = ""
       n += 1
 
     elsif calculus[n-2] == "-"
 
-	    final = nr1.to_i - nr2.to_i
+	    final = nr1.to_f - nr2.to_f
       nr1 = final
       nr2 = ""
       n += 1
       
     elsif calculus[n-2] == "*"
 
-	    final = nr1.to_i * nr2.to_i
+	    final = nr1.to_f * nr2.to_f
       nr1 = final
       nr2 = ""
       n += 1
       
     elsif calculus[n-2] == "/"
 
-	    final = nr1.to_i / nr2.to_i
+	    final = nr1.to_f / nr2.to_f
       nr1 = final
       nr2 = ""
       n += 1
