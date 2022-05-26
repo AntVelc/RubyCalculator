@@ -94,14 +94,48 @@ end
 puts "please write numbers to be calculated along with operands"
 
 k = 0
+accepted = false
 
 while k < 1
-  calculation_string = gets.chomp
-  if calculation_string.count("+-/*") > 0 && (calculation_string[0].count("0-9") > 0 || calculation_string[0].count("-") > 0) && calculation_string[-1].count("0-9") > 0
-    k +=1
-    calcReady = calculation_string.delete(' ')
-    calculator(calcReady)
-else
-    puts "please put in only numbers and operands, as well as to start and finish with numbers"
+  
+  j = 0
+  calcString0 = gets.chomp
+  calcString = calcString0.delete(' ')
+  csn = calcString.length
+  
+  while j < csn
+
+    duplicatedOperands = true
+
+    if j < csn - 2 and calcString[j].count("+/*-") > 0 && calcString[j+1].count("+/*") > 0
+      j = csn
+    elsif j < csn - 2 and calcString[j].count("-") > 0 && calcString[j+1].count("-") > 0 && calcString[j+2].count("-") > 0
+      j = csn
+    elsif j == csn - 1
+      duplicatedOperands = false
+      j += 1
+    else
+      j +=1
+    end
+
+    
+    
+    
+    if duplicatedOperands == false && (calcString.count("-+/*") + calcString.count("0-9") == csn) && (calcString[0].count("0-9") > 0 || calcString[0].count("-") > 0) && calcString[-1].count("0-9") > 0 
+
+      k += 1
+      accepted = true
+      
+    end
+    
   end
+
+  if accepted == false
+    puts "please put in only numbers and their operands, as well as to start and finish with numbers" 
+  end
+
+end
+
+if accepted == true
+  calculator(calcString)
 end
